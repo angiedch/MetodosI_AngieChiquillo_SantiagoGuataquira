@@ -81,7 +81,8 @@ def transaccion_mayor_en_bloque(blockchain:list, numero_bloque:int) -> dict:
                         dic_transaccion= transaccion
                         
     return dic_transaccion
-
+x=4
+print(x)
 
 
 
