@@ -41,17 +41,16 @@ for i in kapton:
 for i in NOA138:
     indices=(i[1])
     indices_refracciónn.append(indices) 
-indices_refracciónka=np.array(indices_refracciónk,dtype=(np.float))
-indices_refracciónna=np.array(indices_refracciónn,dtype=(np.float))
-print(indices_refracciónka)
+indices_refracciónka=np.array(indices_refracciónk,dtype=(float))
+indices_refracciónna=np.array(indices_refracciónn,dtype=(float))
+
 def promedio(x):
     return np.mean(x)
 def desviacion_estandar(x):
     return np.std(x)
 
-  
+"""
 fig,axs=mp.subplots(1,2)
-
 axs[0].plot(longitudes_de_ondak,indices_refracciónk)
 axs[0].set_ylabel('indices refraccion')
 axs[0].set_xlabel('longitud de onda')
@@ -65,6 +64,45 @@ axs[1].set_xlabel('longitud de onda')
 axs[1].set_xticks([])
 axs[1].set_yticks([])
 axs[1].set_title('NOA1038')            
+"""
 
+def graficas(archivo):
+    y=refraccion(archivo)
+    indicesrefraccion=[]
+    longitudesondas=[]
+    for i in y:
+        indicesrefraccion.append(i[1])
+        longitudesondas.append(i[0])
+    indicesrefracciona=np.array(indicesrefraccion,dtype=(float))
+    longitudesondasa=np.array(longitudesondas,dtype=(float))
+    #r=promedio(indicesrefracciona)
+    #l=desviacion_estandar(indicesrefracciona)
+    mp.plot(longitudesondasa,indicesrefracciona)
+    mp.ylabel("indices refracción")
+    mp.xlabel("longitud de onda")
+    mp.xticks([])
+    mp.yticks([])
+    guardargrafica=()
+    if "Vidrio" in archivo:
+        guardargrafica=(".\Vidrio\gráfica.jpg")
+    elif "Plasticos" in archivo:
+        guardargrafica=(".\Plasticos\gráfica.jpg")
+    elif "Mezclas" in archivo:
+        guardargrafica=(".\Mezclas\gráfica.jpg")
+    elif "Materia_Orgánica" in archivo:
+        guardargrafica=(".\Materia_Orgánica\gráfica.jpg")
+    elif "Materia_Inorgánica" in archivo:
+        guardargrafica=(".\Materia_Inorgánica\gráfica.jpg")
+    elif "Exotico" in archivo:
+        guardargrafica=(".\Exotico\gráfica.jpg")
+    elif "Combustible" in archivo:
+        guardargrafica=(".\Combustible\gráfica.jpg")
+    elif "Adhesivos_Ópticos" in archivo:
+        guardargrafica=(".\Adhesivos_Ópticos\gráfica.jpg")
+        
+    
+    mp.savefig(guardargrafica)
+    mp.show()
+    return "gráfica guardada con exito :D"
 
-
+print(graficas('.\Plasticos\French.yml'))
