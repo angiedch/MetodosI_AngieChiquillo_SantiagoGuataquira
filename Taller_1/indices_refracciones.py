@@ -1,6 +1,6 @@
 import numpy as np 
 import matplotlib.pyplot as mp 
-
+import pandas as po
 
 
 def  lectura (archivo):
@@ -174,8 +174,12 @@ def graficas(archivo):
         guardargrafica=(".\Adhesivos_Ópticos"+"\\"+"grafica" + str(nombre)+".jpg")
         
     
-    #mp.savefig(guardargrafica)
-    #mp.show()
+    mp.savefig(guardargrafica)
     return "gráficas guardadas con exito :D"
+lista_elementos = po.read_csv('./indices_refraccion.csv')
+lista_rutas_yml = './'+lista_elementos['Categoría']+'/'+lista_elementos['Material']+'.yml'
 
-print(graficas('.\Vidrio\Bf1.yml'))
+for f in lista_rutas_yml.values:
+    graficas(f)
+    
+
