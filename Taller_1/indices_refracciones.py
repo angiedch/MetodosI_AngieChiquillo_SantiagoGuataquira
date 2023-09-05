@@ -1,7 +1,6 @@
 import numpy as np 
 import matplotlib.pyplot as mp 
-import pandas as po
-
+import os 
 
 def  lectura (archivo):
     o=open(archivo)
@@ -38,7 +37,7 @@ def refraccion (archivo):
     return lista_tuplas
 
 
-"""
+
 kapton=refraccion('.\Plasticos\French.yml')
 NOA138=refraccion('.\Adhesivos_Ópticos\Iezzi.yml')
 longitudes_de_ondakn=[]
@@ -73,14 +72,14 @@ indices_refracciónna=np.array(indices_refracciónn,dtype=(float))
 longitudes_de_ondak1=np.array(longitudes_de_ondakn,dtype=(float))
 longitudes_de_ondak2=np.array(longitudes_de_ondakk,dtype=(float))
 longitudes_de_ondana=np.array(longitudes_de_ondan,dtype=(float))
-"""
+
 def promedio(x):
     y=np.mean(x)
     return np.round(y,5)
 def desviacion_estandar(x):
     y=np.std(x)
     return np.round(y,5)
-"""
+
 k=promedio(indices_refracciónk1)
 kd=desviacion_estandar(indices_refracciónk1)
 n=promedio(indices_refracciónk1)
@@ -106,7 +105,7 @@ axs[2].set_ylabel('indices refraccion')
 axs[2].set_xlabel('longitud de onda')
 axs[2].set_title('NOA1038 prom='+str(n)+" error="+str(nd))           
 
-"""
+
 def graficas(archivo):
     y=refraccion(archivo)
     t=len(y)
@@ -175,11 +174,84 @@ def graficas(archivo):
         
     
     mp.savefig(guardargrafica)
-    return "gráficas guardadas con exito :D"
-lista_elementos = po.read_csv('./indices_refraccion.csv')
-lista_rutas_yml = './'+lista_elementos['Categoría']+'/'+lista_elementos['Material']+'.yml'
+    mp.close()
 
-for f in lista_rutas_yml.values:
-    graficas(f)
-    
+vidrio=".\Vidrio"
+rutas=[]
+ymls= os.listdir(vidrio)
+for i in ymls:
+    if ".yml" in i:
+        ruta_ymls = os.path.join(vidrio, i)
+        rutas.append(ruta_ymls)
 
+for i in rutas:
+    graficas(i)
+
+Plasticos=".\Plasticos"
+rutas=[]
+ymls= os.listdir(Plasticos)
+for i in ymls:
+    if ".yml" in i:
+        ruta_ymls = os.path.join(Plasticos, i)
+        rutas.append(ruta_ymls)
+
+for i in rutas:
+    graficas(i)
+
+mezclas=".\Mezclas"
+rutas=[]
+ymls= os.listdir(mezclas)
+for i in ymls:
+    if ".yml" in i:
+        ruta_ymls = os.path.join(mezclas, i)
+        rutas.append(ruta_ymls)
+
+for i in rutas:
+    graficas(i)
+
+materiaorganica=".\Materia_Orgánica"
+rutas=[]
+ymls= os.listdir(materiaorganica)
+for i in ymls:
+    if ".yml" in i:
+        ruta_ymls = os.path.join(materiaorganica, i)
+        rutas.append(ruta_ymls)
+
+for i in rutas:
+    graficas(i)
+
+
+Exoticos=".\Exotico"
+rutas=[]
+ymls= os.listdir(Exoticos)
+for i in ymls:
+    if ".yml" in i:
+        ruta_ymls = os.path.join(Exoticos, i)
+        rutas.append(ruta_ymls)
+
+for i in rutas:
+    graficas(i)
+
+
+Combustible=".\Combustible"
+rutas=[]
+ymls= os.listdir(Combustible)
+for i in ymls:
+    if ".yml" in i:
+        ruta_ymls = os.path.join(Combustible, i)
+        rutas.append(ruta_ymls)
+
+for i in rutas:
+    graficas(i)
+
+
+Adhesivos=".\Adhesivos_Ópticos"
+rutas=[]
+ymls= os.listdir(Adhesivos)
+for i in ymls:
+    if ".yml" in i:
+        ruta_ymls = os.path.join(Adhesivos, i)
+        rutas.append(ruta_ymls)
+
+for i in rutas:
+    graficas(i)
