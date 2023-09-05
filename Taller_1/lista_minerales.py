@@ -1,8 +1,9 @@
-#Clase Minerales
+
 import matplotlib.pyplot as plt
 import numpy as np
 
-class Minerales:
+#Clase Mineral
+class Mineral:
     def __init__ (self, nombre, dureza, rompimiento_por_fractura, color, composicion, lustre, specific_gravity, sistema_cristalino):
         self.nombre = nombre
         self.dureza = float(dureza)
@@ -24,7 +25,7 @@ class Minerales:
     def mostrar_color (self):
         rgb = tuple(int(self[i:i+2], 16) for i in (1, 3, 5))
         print(rgb)
-        color = np.full((50, 50, 3), rgb)
+        color = np.full((1, 1, 3), rgb)
     
         plt.imshow(color)
         plt.axis('off')
@@ -36,34 +37,26 @@ class Minerales:
         print(self.rompimiento_por_fractura)
         print(self.sistema_cristalino)
 
-#Diccionario de minerales
+
+
+#Arreglo de minerales
 def arreglo_minerales(archivo):
     with open(archivo,encoding="utf-8") as file:
         cont= file.read()
 
-    mineral=[]
+    minerales=[]
     
     renglones=cont.split("\n")[1:]
     
     for i in renglones:
         renglon= i.split("\t")
-        mineral.append(Minerales(*renglon))
-        
-    #for i in mineral:
-    #    if i != mineral[0]:
-    #        for j in  i:
-    #            if j==i[0]:
-    #                arreglo[j] = []
-    #                i.remove(j)
-    #                min= j
-    #            else:
-    #                None
-                
-    #            arreglo[min]=i
-                 
-    return mineral
+        minerales.append(Mineral(*renglon))
+
+    return minerales
 todos = arreglo_minerales('minerales.txt')
 
+
+#Programa de Minerales
 promedio_densidad= 0
 silicatos=[]
 for t in todos:
@@ -72,40 +65,8 @@ for t in todos:
         silicatos.append(t)
 
 promedio_densidad/= len(todos)
-print(promedio_densidad)
+#print(promedio_densidad)
 print(len(silicatos))
-#print(t.nombre, t.silicato())
     
-#Programa Minerales
+class ExpansionTermicaMineral (Mineral):
 
-#Cantidad de silicatos
-def cantidad_silicatos (lista):
-    
-    cant= 0
-    for i in lista.values():
-        for j in i:
-            if j == i[3]:
-                if "Si" and "O" in j:
-                    cant+=1
-                else:
-                    None
-            else:
-                None
-    return cant        
-
-#Densidad promedio de los minerales   
-def densidad_promedio(lista):
-    
-    suma= 0 
-    cantidad= 0
-    for i in lista.values():
-        for j in i:
-            if j == i[5]:
-                suma+= float(j)
-                cantidad+= 1
-                
-    media= suma/ cantidad
-    return media 
-
-#CONSOLA del programa
-print()

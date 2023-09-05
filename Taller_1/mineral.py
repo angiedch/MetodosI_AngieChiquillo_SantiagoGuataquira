@@ -6,7 +6,7 @@ class Minerales:
     def __init__ (self, nombre, dureza, rompimiento_por_fractura, color, composicion, lustre, specific_gravity, sistema_cristalino):
         self.nombre = nombre
         self.dureza = float(dureza)
-        self.lustre = float(lustre)
+        self.lustre = lustre
         self.rompimiento_por_fractura = rompimiento_por_fractura
         self.color = color
         self.composicion = composicion
@@ -15,13 +15,10 @@ class Minerales:
         
     def silicato (self):
         
-        if "Si" and "O" in self.composicion:
-            print("El mineral es un silicato")    
-        else:
-            print("El mineral no es un silicato")
+        return ("Si" in self.composicion) and ("O" in self.composicion)
             
     def densidad (self):
-        
+    #En unidades SI
         print(f'{self.specific_gravity} g/cm^3')
         
     def mostrar_color (self):
@@ -33,8 +30,8 @@ class Minerales:
         plt.axis('off')
         plt.show()
         
-    def imprimir_datos (self):
+    def imprimir_dureza (self):
         
-        print(f'La dureza del mineral es {self.dureza}.')
-        print(f'El rompimiento del mineral es {self.rompimiento_por_fractura}.')
-        print(f'El sistema cristalino del mineral es {self.sistema_cristalino}.')
+        print(self.dureza)
+        print(self.rompimiento_por_fractura)
+        print(self.sistema_cristalino)
