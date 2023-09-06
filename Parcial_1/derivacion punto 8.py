@@ -26,38 +26,47 @@ f = function(x)
 a_0 = f[0]
 a_1 = (f[1]-f[0])/h
 a_2= (f[2]-f[1])/(2*(h**2))
+X = np.linspace(0,10,101)
 
-X = np.linspace(0,1,50)
-p = a_0 + a_1*(X-x[0]) + a_2*(X-x[0])*(X-x[1])
+def polinomio (x, X, a_0, a_1, a_2):
+    return a_0 + a_1*(X-x[0]) + a_2*(X-x[0])*(X-x[1])
 
-#plt.scatter(x,f,color='b')
-#plt.plot(X,p, color='g')
-#plt.show()
+p = polinomio(x, X, a_0, a_1, a_2)
+print(p)
+
+#Derivada Exacta
+def DerExacta(x):
+    return ((1/np.cos(x))**2)/(2*(np.tan(x))**(1/2))
 
 #Derivada progresiva
-def DefProgresiva(f, x, h): 
+def DerProgresiva(f, x, h): 
     return (f(x+h) - f(x))/h
     
 
-def DefCentral(f, x, h):
+def DerCentral(f, x, h):
     return (f(x+h) - f(x-h))/(2*h)
 
 
-RDerivative = DefProgresiva(function,x,h)
-CDerivative = DefCentral(function,x,h)
+RDerivative = DerProgresiva(function,x,h)
+CDerivative = DerCentral(function,x,h)
+EDerivative = DerExacta(x)
 
 plt.scatter(x,RDerivative,label='Derivada Derecha')
 plt.scatter(x,CDerivative,label='Derivada Central')
+plt.scatter(x,EDerivative,label='Derivada Exacta')
 plt.legend()
 plt.show()
 
-def ErrorNodal(x, y):
-    return y - x
-
-ENodal= ErrorNodal(p, function)
-plt.scatter(x, ENodal, label= 'Error Nodal')
+#ERROR NODAL
+EProgresiva = np.abs(EDerivative-RDerivative)
+ECentral = np.abs(EDerivative-CDerivative)
+plt.scatter(X, EProgresiva, label='Error Progresiva')
+plt.scatter(X, ECentral, label='Error Central')
 plt.legend()
 plt.show()
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> eea3575b61773d3dfa285209b2973ccf8489de6b
