@@ -34,10 +34,6 @@ def polinomio (x, X, a_0, a_1, a_2):
 p = polinomio(x, X, a_0, a_1, a_2)
 print(p)
 
-#plt.scatter(x,f,color='b')
-#plt.plot(X,p, color='g')
-#plt.show()
-
 #Derivada progresiva
 def DefProgresiva(f, x, h): 
     return (f(x+h) - f(x))/h
@@ -64,23 +60,5 @@ plt.legend()
 plt.show()
 
 
+#Estimación central y progresiva de orden O(h**2)
 
-import os
-c='.Taller_1\Plasticos\French.yml'
-o=open(c)
-r=o.readlines()
-o.close()
-lineas='\n'.join(r)
-datos=lineas.split('|')[1].split('-')[0].split('S')[0]
-print(datos)  
-# Directorio que contiene los archivos .yml
-"""directorio = '.Taller_1\Plasticos\V
-
-
-archivos = os.listdir(directorio)
-# Iterar a través de los archivos y procesar los que tienen extensión .yml
-for archivo in archivos:
-    if archivo.endswith(".yml"):
-        ruta_completa = os.path.join(directorio, archivo)
-
-"""
