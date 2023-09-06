@@ -19,8 +19,8 @@ class Mineral:
         return ("Si" in self.composicion) and ("O" in self.composicion)
             
     def densidad (self):
-    #En unidades SI
-        print(f'{self.specific_gravity} g/cm^3')
+        self.specific_gravity= self.specific_gravity*1000
+        print(self.specific_gravity)
         
     def mostrar_color (self):
         rgb = tuple(int(self[i:i+2], 16) for i in (1, 3, 5))
