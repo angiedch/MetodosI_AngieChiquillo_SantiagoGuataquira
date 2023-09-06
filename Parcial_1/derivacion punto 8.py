@@ -26,7 +26,7 @@ f = function(x)
 a_0 = f[0]
 a_1 = (f[1]-f[0])/h
 a_2= (f[2]-f[1])/(2*(h**2))
-X = np.linspace(0,1000,101)
+X = np.linspace(0,10,101)
 
 def polinomio (x, X, a_0, a_1, a_2):
     return a_0 + a_1*(X-x[0]) + a_2*(X-x[0])*(X-x[1])
