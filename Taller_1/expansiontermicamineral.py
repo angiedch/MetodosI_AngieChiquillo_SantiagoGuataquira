@@ -46,7 +46,7 @@ class ExpansionTermicaMineral(Mineral):
         with open(archivo) as file:
             lineas= file.read()
             elementos=lineas.split('\n')
-            print(elementos)
+            #print(elementos)
             lista= []
             
             
@@ -57,7 +57,24 @@ class ExpansionTermicaMineral(Mineral):
                 self.temperatura.append(i[0])
                 self.volumen.append(i[1])  
                 
-            print(self.temperatura)      
+            self.temperatura.pop(0)
+            self.volumen.pop(0)
+            print(self.temperatura)
+            print(self.volumen) 
+            
+    def coeficiente_expansion (self):
+        d = 0
+        x= self.temperatura
+        y= self.volumen
+        h= x[1]-x[0]
+        
+        #if h != 0:
+           # d = (f(x+h) - f(x-h))/(2*h)
+            
+        
+        
+        return d
+             
             
 x= ExpansionTermicaMineral(Mineral, 'Taller_1\olivine_angel_2017.csv')
 print(x)
