@@ -65,8 +65,7 @@ for t in todos:
         silicatos.append(t)
 
 promedio_densidad/= len(todos)
-#print(promedio_densidad)
+print("El promedio de la densidad de los silicatos es", str(promedio_densidad), "kg/m^3")
+
 print(len(silicatos))
     
-class ExpansionTermicaMineral (Mineral):
-
