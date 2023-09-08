@@ -79,7 +79,7 @@ class ExpansionTermicaMineral(Mineral):
             i=1
 
             while i< len(x)-1:
-                
+
                 pos_xmash= self.temperatura.index(round(x[i]+h, 1))
                 f_xmash= y[pos_xmash]
                     
@@ -96,11 +96,20 @@ class ExpansionTermicaMineral(Mineral):
 
 #se calcula el promedio del coeficiente de expansión térmica para darle un único valor al mineral
         coeficiente/=len(derivative)
-        
         print(derivative)
-        print(coeficiente)
+        print("El coeficiente de expansión térmica del mineral es ", str(coeficiente), ".")
         
+        #Calculando el error
+        error= 0
+        for i in derivative:
+            error+= (i-coeficiente)
+        error/= len(derivative)
+        
+        print("El error global equivale a ", str(error), ".")
+            
         return coeficiente
 
+
+#Utilizando el código para olivino
 classe= ExpansionTermicaMineral(Mineral, 'olivine_angel_2017.csv')
 print(classe.coeficiente_expansion())
