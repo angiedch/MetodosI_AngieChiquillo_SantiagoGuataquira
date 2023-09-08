@@ -146,5 +146,5 @@ print(classeo.coeficiente_expansion())
 
         coeficiente/=len(derivative)
         
-            
+  """          
 
