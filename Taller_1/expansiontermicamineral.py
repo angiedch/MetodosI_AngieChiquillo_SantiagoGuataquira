@@ -68,6 +68,32 @@ class ExpansionTermicaMineral(Mineral):
             #print(self.volumen) 
             
     def coeficiente_expansion (self):
+        dV_dT= np.diff(self.volumen) / np.diff(self.temperatura)
+        V= np.mean(self.volumen)
+    
+        alphass= (1/V)*(dV_dT)
+#se calcula el promedio del coeficiente de expansión térmica para darle un único valor al mineral
+        alpha= np.mean(alphass)
+    
+    #Calculando el error
+        error= 1
+        for i in alphass:
+            error+= i-alpha
+            
+        error/= len(alphass)
+        
+        print(alphass)
+        print(len(alphass))
+        print("El coeficiente de expansión térmica del mineral es ", str(alpha), ".")
+        print("El error global equivale a ", str(error), ".")
+    
+#Utilizando el código para olivino
+classe= ExpansionTermicaMineral(Mineral, 'olivine_angel_2017.csv')
+print(classe.coeficiente_expansion())
+
+
+"""
+    Intento de código falldo :(
         d = 0
         x= self.temperatura
         y= self.volumen
@@ -94,22 +120,9 @@ class ExpansionTermicaMineral(Mineral):
                 i+= 1
                 coeficiente+= alpha
 
-#se calcula el promedio del coeficiente de expansión térmica para darle un único valor al mineral
         coeficiente/=len(derivative)
-        print(derivative)
-        print("El coeficiente de expansión térmica del mineral es ", str(coeficiente), ".")
         
-        #Calculando el error
-        error= 0
-        for i in derivative:
-            error+= (i-coeficiente)
-        error/= len(derivative)
-        
-        print("El error global equivale a ", str(error), ".")
             
         return coeficiente
+"""
 
-
-#Utilizando el código para olivino
-classe= ExpansionTermicaMineral(Mineral, 'olivine_angel_2017.csv')
-print(classe.coeficiente_expansion())
