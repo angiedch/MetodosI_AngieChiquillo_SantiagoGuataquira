@@ -68,28 +68,52 @@ class ExpansionTermicaMineral(Mineral):
             #print(self.volumen) 
             
     def coeficiente_expansion (self):
-        dV_dT= np.diff(self.volumen) / np.diff(self.temperatura)
-        V= np.mean(self.volumen)
-    
-        alphass= (1/V)*(dV_dT)
+        d = 0
+        x= self.temperatura
+        y= self.volumen
+        derivative= []
+        coeficiente=0
+        n=len(x)
+        for i in range(n):
+             #d es la diferencia central   
+            if i == 0:
+                d= (y[i+1] - y[i]) / (x[i+1] - x[i])
+            elif i == n - 1:
+                d= (y[i] - y[i-1]) / (x[i] - x[i-1])
+            else:
+                d= (y[i+1] - y[i-1]) / (x[i+1] - x[i-1])
+            #por 1/V  
+            alpha= d/y[i] 
+            derivative.append(alpha)
+            i+= 1
+            coeficiente+= alpha  
+
 #se calcula el promedio del coeficiente de expansión térmica para darle un único valor al mineral
-        alpha= np.mean(alphass)
-    
-    #Calculando el error
+        coeficiente/=len(derivative)           
+        fig,axs=plt.subplots(1,2,figsize=(15,5))
+        axs[0].plot(x,y)
+        axs[0].set_ylabel("volumen")
+        axs[0].set_xlabel("temperatura")
+        axs[0].set_title("volumen vs temperatura")
+        axs[1].plot(x,derivative)
+        axs[1].set_ylabel("cieficientes de expansión")
+        axs[1].set_xlabel("temperatura")
+        axs[1].set_title("coeficientes de expansión vs temperatura")
+#se calcula el promedio del coeficiente de expansión térmica para darle un único valor al mineral
+        coeficiente/=len(derivative)
+         #Calculando el error
         error= 1
-        for i in alphass:
-            error+= i-alpha
-            
-        error/= len(alphass)
-        
-        print(alphass)
-        print(len(alphass))
-        print("El coeficiente de expansión térmica del mineral es ", str(alpha), ".")
+        for i in derivative:
+            error+= i-coeficiente
+        print(derivative)
+        print("El coeficiente de expansión térmica del mineral es ", str(coeficiente), ".")
         print("El error global equivale a ", str(error), ".")
-    
-#Utilizando el código para olivino
-classe= ExpansionTermicaMineral(Mineral, 'olivine_angel_2017.csv')
-print(classe.coeficiente_expansion())
+        
+        return coeficiente
+
+classeo= ExpansionTermicaMineral(Mineral, 'olivine_angel_2017.csv')
+claseeg=ExpansionTermicaMineral(Mineral,'graphite mceligot 2016.csv')
+print(classeo.coeficiente_expansion())
 
 
 """
@@ -123,19 +147,4 @@ print(classe.coeficiente_expansion())
         coeficiente/=len(derivative)
         
             
-<<<<<<< HEAD
-        return coeficiente
-"""
-||||||| 69ad19e
-        
-        
-        return d
-             
-            
-x= ExpansionTermicaMineral(Mineral, 'Taller_1\olivine_angel_2017.csv')
-print(x)
-=======
-        return coeficiente
-"""
 
->>>>>>> origin/main
