@@ -64,8 +64,8 @@ for t in todos:
     if t.silicato():
         silicatos.append(t)
 
-promedio_densidad/= len(todos)
+promedio_densidad/=len(todos)
 print("El promedio de la densidad de los silicatos es", str(promedio_densidad), "kg/m^3")
 
-print(len(silicatos))
+print("El número de minerales silicatos en la lista es", str(len(silicatos)), ".")
     

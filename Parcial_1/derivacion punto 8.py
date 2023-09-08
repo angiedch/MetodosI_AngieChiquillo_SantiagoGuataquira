@@ -28,10 +28,10 @@ a_1 = (f[1]-f[0])/h
 a_2= (f[2]-f[1])/(2*(h**2))
 X = np.linspace(0,10,101)
 
-def polinomio (x, X, a_0, a_1, a_2):
+def polinomio_resuelto (x, X, a_0, a_1, a_2):
     return a_0 + a_1*(X-x[0]) + a_2*(X-x[0])*(X-x[1])
 
-p = polinomio(x, X, a_0, a_1, a_2)
+p = polinomio_resuelto(x, X, a_0, a_1, a_2)
 print(p)
 
 #Derivada Exacta
@@ -64,9 +64,3 @@ plt.scatter(X, EProgresiva, label='Error Progresiva')
 plt.scatter(X, ECentral, label='Error Central')
 plt.legend()
 plt.show()
-
-
-<<<<<<< HEAD
-
-=======
->>>>>>> eea3575b61773d3dfa285209b2973ccf8489de6b

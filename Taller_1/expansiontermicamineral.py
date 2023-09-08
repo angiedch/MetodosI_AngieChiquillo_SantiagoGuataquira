@@ -123,5 +123,19 @@ print(classe.coeficiente_expansion())
         coeficiente/=len(derivative)
         
             
+<<<<<<< HEAD
         return coeficiente
 """
+||||||| 69ad19e
+        
+        
+        return d
+             
+            
+x= ExpansionTermicaMineral(Mineral, 'Taller_1\olivine_angel_2017.csv')
+print(x)
+=======
+        return coeficiente
+"""
+
+>>>>>>> origin/main
