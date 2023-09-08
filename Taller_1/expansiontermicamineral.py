@@ -73,23 +73,34 @@ class ExpansionTermicaMineral(Mineral):
         y= self.volumen
         h= x[1]-x[0]
         derivative= []
+        coeficiente=0
         
         if h != 0:
-            i=0
-            while i<= len(x):
-                if ((x[i] + h) in x) and ((x[i] - h) in x):
-                    pos_xmash= self.temperatura.index(x[i]+h)
-                    f_xmash= y[pos_xmash]
-                    f_xmenosh= self.temperatura.index(x[i]-h)
+            i=1
 
-                    d= (f_xmash - f_xmenosh)/(2*h)
-                    derivative.append(d)
-                    i+= 1
-            
-        print(derivative)
+            while i< len(x)-1:
+                
+                pos_xmash= self.temperatura.index(round(x[i]+h, 1))
+                f_xmash= y[pos_xmash]
+                    
+                pos_xmenosh= self.temperatura.index(round(x[i]-h, 1))
+                f_xmenosh= y[pos_xmenosh]
+                #d es la diferencia central
+                d= (f_xmash - f_xmenosh)/(2*h)  
+                
+                #por 1/V  
+                alpha= d/y[i]               
+                derivative.append(alpha)
+                i+= 1
+                coeficiente+= alpha
+
+#se calcula el promedio del coeficiente de expansión térmica para darle un único valor al mineral
+        coeficiente/=len(derivative)
         
-        return derivative
-             
-            
+        print(derivative)
+        print(coeficiente)
+        
+        return coeficiente
+
 classe= ExpansionTermicaMineral(Mineral, 'olivine_angel_2017.csv')
 print(classe.coeficiente_expansion())
