@@ -53,28 +53,65 @@ class ExpansionTermicaMineral(Mineral):
             for i in elementos:
                 x= i.split(',')
                 lista.append(x)
+
             for i in lista:
+            
                 self.temperatura.append(i[0])
                 self.volumen.append(i[1])  
                 
             self.temperatura.pop(0)
             self.volumen.pop(0)
-            print(self.temperatura)
-            print(self.volumen) 
+            
+            self.temperatura = list(map(float, self.temperatura))
+            self.volumen = list(map(float, self.volumen))
+            #print(self.temperatura)
+            #print(self.volumen) 
             
     def coeficiente_expansion (self):
         d = 0
         x= self.temperatura
         y= self.volumen
-        h= x[1]-x[0]
+        derivative= []
+        coeficiente=0
+        n=len(x)
+        for i in range(n):
+             #d es la diferencia central   
+            if i == 0:
+                d= (y[i+1] - y[i]) / (x[i+1] - x[i])
+            elif i == n - 1:
+                d= (y[i] - y[i-1]) / (x[i] - x[i-1])
+            else:
+                d= (y[i+1] - y[i-1]) / (x[i+1] - x[i-1])
+            #por 1/V  
+            alpha= d/y[i] 
+            derivative.append(alpha)
+            i+= 1
+            coeficiente+= alpha  
+
+#se calcula el promedio del coeficiente de expansión térmica para darle un único valor al mineral
+        coeficiente/=len(derivative)           
+        fig,axs=plt.subplots(1,2,figsize=(15,5))
+        axs[0].plot(x,y)
+        axs[0].set_ylabel("volumen")
+        axs[0].set_xlabel("temperatura")
+        axs[0].set_title("volumen vs temperatura")
+        axs[1].plot(x,derivative)
+        axs[1].set_ylabel("cieficientes de expansión")
+        axs[1].set_xlabel("temperatura")
+        axs[1].set_title("coeficientes de expansión vs temperatura")
+#se calcula el promedio del coeficiente de expansión térmica para darle un único valor al mineral
+        coeficiente/=len(derivative)
+         #Calculando el error
+        error= 1
+        for i in derivative:
+            error+= i-coeficiente
+        print(derivative)
+        print("El coeficiente de expansión térmica del mineral es ", str(coeficiente), ".")
+        print("El error global equivale a ", str(error), ".")
         
-        #if h != 0:
-           # d = (f(x+h) - f(x-h))/(2*h)
-            
-        
-        
-        return d
-             
-            
-x= ExpansionTermicaMineral(Mineral, 'Taller_1\olivine_angel_2017.csv')
-print(x)
+        return coeficiente
+
+classeo= ExpansionTermicaMineral(Mineral, 'olivine_angel_2017.csv')
+claseeg=ExpansionTermicaMineral(Mineral,'graphite_mceligot_2016.csv')
+print(classeo.coeficiente_expansion())
+print(claseeg.coeficiente_expansion())
