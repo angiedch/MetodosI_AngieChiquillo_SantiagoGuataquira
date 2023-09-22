@@ -68,18 +68,19 @@ class ExpansionTermicaMineral(Mineral):
             #print(self.volumen) 
             
     def coeficiente_expansion (self):
+        
         dV_dT= np.diff(self.volumen) / np.diff(self.temperatura)
-        V= np.mean(self.volumen)
+        V= np.mean(self.volumen[:-1])
     
         alphass= (1/V)*(dV_dT)
 #se calcula el promedio del coeficiente de expansión térmica para darle un único valor al mineral
         alpha= np.mean(alphass)
     
     #Calculando el error
-        error= 1
+        error= 0
         for i in alphass:
             error+= i-alpha
-            
+            print(error)
         error/= len(alphass)
         
         print(alphass)
